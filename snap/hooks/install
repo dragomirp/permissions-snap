@@ -1,0 +1,9 @@
+#!/bin/bash
+set -e
+
+mkdir "$SNAP_DATA/test"
+chmod 770 "$SNAP_DATA/test"
+chown snap_daemon "$SNAP_DATA/test"
+chgrp root "$SNAP_DATA/test"
+
+echo "TEST" | "$SNAP/usr/bin/setpriv" --clear-groups --reuid snap_daemon --regid snap_daemon -- tee "$SNAP_DATA/test/test_file"
